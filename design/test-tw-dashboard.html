@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Orion — Enterprise Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style type="text/tailwindcss">
+@theme {
+  --color-primary: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-accent: var(--color-accent);
+  --color-surface: var(--color-surface);
+  --color-surface-alt: var(--color-surface-alt);
+  --color-text: var(--color-text);
+  --color-muted: var(--color-muted);
+  --color-border: var(--color-border);
+  --color-success: var(--color-success);
+  --color-error: var(--color-error);
+}
+</style>
+<style>
+:root {
+  --color-primary: #6366F1;
+  --color-primary-dark: #4F46E5;
+  --color-accent: #F59E0B;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F9FAFB;
+  --color-text: #111827;
+  --color-muted: #6B7280;
+  --color-border: #E5E7EB;
+  --color-success: #22C55E;
+  --color-error: #EF4444;
+}
+body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+.page { display: none; }
+.page.active { display: block; }
+</style>
+</head>
+<body class="bg-surface-alt text-text antialiased">
+<div class="flex min-h-screen">
+  <!-- Sidebar -->
+  <aside class="w-64 shrink-0 flex flex-col bg-primary text-white">
+    <div class="flex items-center gap-3 px-6 pt-6 pb-8">
+      <div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold shrink-0 bg-accent text-white">O</div>
+      <span class="text-lg font-semibold tracking-tight">Orion</span>
+    </div>
+    <nav class="flex-1 flex flex-col gap-0.5 px-3">
+      <button onclick="switchPage('dashboard')" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm bg-white/10 font-medium text-left">
+        <span class="text-base">📊</span> Dashboard
+      </button>
+      <button onclick="switchPage('analytics')" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm opacity-55 hover:opacity-80 transition-opacity text-left">
+        <span class="text-base">📈</span> Analytics
+      </button>
+      <button onclick="switchPage('team')" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm opacity-55 hover:opacity-80 transition-opacity text-left">
+        <span class="text-base">👥</span> Team
+      </button>
+      <button onclick="switchPage('projects')" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm opacity-55 hover:opacity-80 transition-opacity text-left">
+        <span class="text-base">📁</span> Projects
+      </button>
+      <button onclick="switchPage('settings')" class="nav-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm opacity-55 hover:opacity-80 transition-opacity text-left">
+        <span class="text-base">⚙️</span> Settings
+      </button>
+    </nav>
+    <div class="px-4 pt-6 pb-6">
+      <div class="flex items-center gap-3 border-t border-white/10 pt-4">
+        <div class="w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold shrink-0 bg-accent text-white">AK</div>
+        <div class="min-w-0">
+          <div class="text-sm font-medium truncate">Alex Kim</div>
+          <div class="text-xs truncate text-white/50">alex@orion.io</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <!-- Main content -->
+  <main class="flex-1 overflow-y-auto">
+    <!-- ═══ Dashboard ═══ -->
+    <div id="page-dashboard" class="page active p-8">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h1 class="text-2xl font-bold tracking-tight text-text">Dashboard</h1>
+          <p class="text-sm mt-1 text-muted">Welcome back, Alex. Here's what's happening.</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-2.5 px-4 py-2 rounded-xl border border-border bg-surface shadow-sm">
+            <span class="text-muted text-sm">🔍</span>
+            <input type="text" placeholder="Search..." class="text-sm outline-none bg-transparent w-48 text-text" />
+          </div>
+          <div class="flex items-center gap-1">
+            <button class="w-9 h-9 rounded-xl flex items-center justify-center text-sm cursor-pointer border-0 bg-surface-alt text-muted hover:bg-border transition-colors">🔔</button>
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center text-xs font-semibold cursor-pointer bg-primary text-white">AK</div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-4 gap-6 mb-8">
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-sm">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-medium uppercase tracking-wider text-muted">Revenue</span>
+            <span class="text-lg">💰</span>
+          </div>
+          <div class="text-3xl font-bold tracking-tight text-text">$48,250</div>
+          <div class="flex items-center gap-1.5 mt-2 text-sm font-medium text-success">↑ 12.5% vs last month</div>
+        </div>
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-sm">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-medium uppercase tracking-wider text-muted">Users</span>
+            <span class="text-lg">👤</span>
+          </div>
+          <div class="text-3xl font-bold tracking-tight text-text">2,847</div>
+          <div class="flex items-center gap-1.5 mt-2 text-sm font-medium text-success">↑ 8.2%</div>
+        </div>
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-sm">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-medium uppercase tracking-wider text-muted">Conversion</span>
+            <span class="text-lg">📊</span>
+          </div>
+          <div class="text-3xl font-bold tracking-tight text-text">3.42%</div>
+          <div class="flex items-center gap-1.5 mt-2 text-sm font-medium text-success">↑ 0.8 pp</div>
+        </div>
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-sm">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-medium uppercase tracking-wider text-muted">Bounce Rate</span>
+            <span class="text-lg">📉</span>
+          </div>
+          <div class="text-3xl font-bold tracking-tight text-text">24.1%</div>
+          <div class="flex items-center gap-1.5 mt-2 text-sm font-medium text-error">↓ 2.3%</div>
+        </div>
+      </div>
+      <div class="grid grid-cols-3 gap-6 mb-8">
+        <div class="col-span-2 p-6 rounded-2xl border border-border bg-surface shadow-sm">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-base font-semibold text-text">Monthly Revenue</h3>
+            <select class="text-xs px-3 py-1.5 rounded-xl border border-border bg-transparent outline-none text-muted">
+              <option>Last 6 months</option>
+              <option>Last 12 months</option>
+            </select>
+          </div>
+          <div class="flex items-end justify-between gap-3 h-48 pt-2">
+            <div class="flex-1 flex flex-col items-center gap-2">
+              <div class="w-full rounded-lg bg-primary/70" style="height:35%"></div><span class="text-xs text-muted">Nov</span>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-2">
+              <div class="w-full rounded-lg bg-primary" style="height:50%"></div><span class="text-xs text-muted">Dec</span>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-2">
+              <div class="w-full rounded-lg bg-primary/80" style="height:40%"></div><span class="text-xs text-muted">Jan</span>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-2">
+              <div class="w-full rounded-lg bg-primary" style="height:65%"></div><span class="text-xs text-muted">Feb</span>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-2">
+              <div class="w-full rounded-lg bg-primary/80" style="height:55%"></div><span class="text-xs text-muted">Mar</span>
+            </div>
+            <div class="flex-1 flex flex-col items-center gap-2">
+              <div class="w-full rounded-lg bg-primary" style="height:85%"></div><span class="text-xs text-muted">Apr</span>
+            </div>
+          </div>
+        </div>
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-sm">
+          <h3 class="text-base font-semibold mb-5 text-text">Recent Activity</h3>
+          <div class="flex flex-col gap-5">
+            <div class="flex items-start gap-3">
+              <div class="w-2.5 h-2.5 rounded-full mt-1.5 shrink-0 bg-success"></div>
+              <div><div class="text-sm font-medium text-text">Deployment successful</div><div class="text-xs mt-0.5 text-muted">v2.4.1 — 2 min ago</div></div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-2.5 h-2.5 rounded-full mt-1.5 shrink-0 bg-primary"></div>
+              <div><div class="text-sm font-medium text-text">New user onboarded</div><div class="text-xs mt-0.5 text-muted">Sarah Chen — 15 min ago</div></div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-2.5 h-2.5 rounded-full mt-1.5 shrink-0 bg-error"></div>
+              <div><div class="text-sm font-medium text-text">API timeout detected</div><div class="text-xs mt-0.5 text-muted">/metrics — 1 hour ago</div></div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-2.5 h-2.5 rounded-full mt-1.5 shrink-0 bg-success"></div>
+              <div><div class="text-sm font-medium text-text">Database backup</div><div class="text-xs mt-0.5 text-muted">Completed — 2 hours ago</div></div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-2.5 h-2.5 rounded-full mt-1.5 shrink-0 bg-accent"></div>
+              <div><div class="text-sm font-medium text-text">SSL cert renewal</div><div class="text-xs mt-0.5 text-muted">Expires in 14 days</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-2xl border border-border bg-surface shadow-sm overflow-hidden">
+        <div class="flex items-center justify-between px-6 py-4 border-b border-border">
+          <h3 class="text-base font-semibold text-text">Recent Orders</h3>
+          <button class="text-sm font-medium text-primary hover:text-primary-dark">View all →</button>
+        </div>
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-xs font-medium uppercase tracking-wider text-muted bg-surface-alt">
+              <th class="text-left px-6 py-3.5 font-medium">Order</th>
+              <th class="text-left px-6 py-3.5 font-medium">Customer</th>
+              <th class="text-left px-6 py-3.5 font-medium">Amount</th>
+              <th class="text-left px-6 py-3.5 font-medium">Status</th>
+              <th class="text-right px-6 py-3.5 font-medium">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-border hover:bg-surface-alt transition-colors">
+              <td class="px-6 py-4 font-medium text-text">#OR-2847</td>
+              <td class="px-6 py-4 text-text">Sarah Chen</td>
+              <td class="px-6 py-4 text-text">$2,400.00</td>
+              <td class="px-6 py-4"><span class="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-xl bg-success/10 text-success"><span class="w-1.5 h-1.5 rounded-full bg-success"></span>Active</span></td>
+              <td class="px-6 py-4 text-right text-xs text-muted">Today</td>
+            </tr>
+            <tr class="border-t border-border hover:bg-surface-alt transition-colors">
+              <td class="px-6 py-4 font-medium text-text">#OR-2846</td>
+              <td class="px-6 py-4 text-text">Marcus Rivera</td>
+              <td class="px-6 py-4 text-text">$850.00</td>
+              <td class="px-6 py-4"><span class="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-xl bg-primary/10 text-primary"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span>Pending</span></td>
+              <td class="px-6 py-4 text-right text-xs text-muted">Yesterday</td>
+            </tr>
+            <tr class="border-t border-border hover:bg-surface-alt transition-colors">
+              <td class="px-6 py-4 font-medium text-text">#OR-2845</td>
+              <td class="px-6 py-4 text-text">Priya Patel</td>
+              <td class="px-6 py-4 text-text">$3,200.00</td>
+              <td class="px-6 py-4"><span class="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-xl bg-success/10 text-success"><span class="w-1.5 h-1.5 rounded-full bg-success"></span>Active</span></td>
+              <td class="px-6 py-4 text-right text-xs text-muted">2 days ago</td>
+            </tr>
+            <tr class="border-t border-border hover:bg-surface-alt transition-colors">
+              <td class="px-6 py-4 font-medium text-text">#OR-2844</td>
+              <td class="px-6 py-4 text-text">James Wilson</td>
+              <td class="px-6 py-4 text-text">$1,100.00</td>
+              <td class="px-6 py-4"><span class="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-xl bg-error/10 text-error"><span class="w-1.5 h-1.5 rounded-full bg-error"></span>Failed</span></td>
+              <td class="px-6 py-4 text-right text-xs text-muted">3 days ago</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="flex items-center justify-between px-6 py-4 border-t border-border">
+          <div class="text-xs text-muted">Showing 4 of 24 orders</div>
+          <div class="flex gap-2">
+            <button class="text-xs font-medium px-3 py-1.5 rounded-xl border border-border text-muted hover:bg-surface-alt">Previous</button>
+            <button class="text-xs font-medium px-3 py-1.5 rounded-xl border border-border text-muted hover:bg-surface-alt">Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ Analytics ═══ -->
+    <div id="page-analytics" class="page p-8">
+      <h1 class="text-2xl font-bold tracking-tight text-text mb-1">Analytics</h1>
+      <p class="text-sm text-muted mb-8">Track your growth metrics over time.</p>
+      <div class="grid grid-cols-2 gap-6 mb-6">
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-sm">
+          <h3 class="text-sm font-semibold text-text mb-1">Page Views</h3>
+          <div class="text-3xl font-bold tracking-tight text-text">284.7K</div>
+          <div class="text-sm text-success mt-1">↑ 8.3% this week</div>
+          <div class="mt-6 flex items-end justify-between gap-2 h-32">
+            <div class="flex-1 rounded-lg bg-primary/60" style="height:45%"></div>
+            <div class="flex-1 rounded-lg bg-primary/70" style="height:55%"></div>
+            <div class="flex-1 rounded-lg bg-primary/80" style="height:40%"></div>
+            <div class="flex-1 rounded-lg bg-primary/90" style="height:65%"></div>
+            <div class="flex-1 rounded-lg bg-primary" style="height:80%"></div>
+            <div class="flex-1 rounded-lg bg-primary/80" style="height:60%"></div>
+            <div class="flex-1 rounded-lg bg-primary/90" style="height:75%"></div>
+          </div>
+        </div>
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-sm">
+          <h3 class="text-sm font-semibold text-text mb-1">Traffic Sources</h3>
+          <div class="mt-4 space-y-3">
+            <div><div class="flex justify-between text-sm mb-1"><span class="text-text">Organic Search</span><span class="text-muted">42%</span></div><div class="h-2 rounded-full bg-surface-alt"><div class="h-2 rounded-full bg-primary" style="width:42%"></div></div></div>
+            <div><div class="flex justify-between text-sm mb-1"><span class="text-text">Direct</span><span class="text-muted">28%</span></div><div class="h-2 rounded-full bg-surface-alt"><div class="h-2 rounded-full bg-accent" style="width:28%"></div></div></div>
+            <div><div class="flex justify-between text-sm mb-1"><span class="text-text">Social</span><span class="text-muted">18%</span></div><div class="h-2 rounded-full bg-surface-alt"><div class="h-2 rounded-full bg-success" style="width:18%"></div></div></div>
+            <div><div class="flex justify-between text-sm mb-1"><span class="text-text">Referral</span><span class="text-muted">12%</span></div><div class="h-2 rounded-full bg-surface-alt"><div class="h-2 rounded-full bg-error" style="width:12%"></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-sm text-center">
+          <div class="text-3xl mb-2">⏱️</div>
+          <div class="text-2xl font-bold text-text">4m 32s</div>
+          <div class="text-xs text-muted mt-1">Avg. Session</div>
+        </div>
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-sm text-center">
+          <div class="text-3xl mb-2">👆</div>
+          <div class="text-2xl font-bold text-text">12.8%</div>
+          <div class="text-xs text-muted mt-1">Click Rate</div>
+        </div>
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-sm text-center">
+          <div class="text-3xl mb-2">🔄</div>
+          <div class="text-2xl font-bold text-text">34.2%</div>
+          <div class="text-xs text-muted mt-1">Return Rate</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ Team ═══ -->
+    <div id="page-team" class="page p-8">
+      <h1 class="text-2xl font-bold tracking-tight text-text mb-1">Team</h1>
+      <p class="text-sm text-muted mb-8">Manage your team members and their roles.</p>
+      <div class="grid grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-sm text-center">
+          <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-2xl mx-auto mb-3">👩‍💻</div>
+          <h3 class="font-semibold text-text">Sarah Chen</h3>
+          <p class="text-xs text-muted">Lead Engineer</p>
+          <span class="inline-block mt-3 text-xs font-medium px-2.5 py-1 rounded-xl bg-success/10 text-success">Active</span>
+        </div>
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-sm text-center">
+          <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-2xl mx-auto mb-3">👨‍💼</div>
+          <h3 class="font-semibold text-text">Marcus Rivera</h3>
+          <p class="text-xs text-muted">Product Manager</p>
+          <span class="inline-block mt-3 text-xs font-medium px-2.5 py-1 rounded-xl bg-success/10 text-success">Active</span>
+        </div>
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-sm text-center">
+          <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-2xl mx-auto mb-3">👩‍🎨</div>
+          <h3 class="font-semibold text-text">Priya Patel</h3>
+          <p class="text-xs text-muted">Designer</p>
+          <span class="inline-block mt-3 text-xs font-medium px-2.5 py-1 rounded-xl bg-accent/10 text-accent">Away</span>
+        </div>
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-sm text-center">
+          <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-2xl mx-auto mb-3">👨‍🔬</div>
+          <h3 class="font-semibold text-text">James Wilson</h3>
+          <p class="text-xs text-muted">Data Analyst</p>
+          <span class="inline-block mt-3 text-xs font-medium px-2.5 py-1 rounded-xl bg-success/10 text-success">Active</span>
+        </div>
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-sm text-center">
+          <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-2xl mx-auto mb-3">👩‍💼</div>
+          <h3 class="font-semibold text-text">Emma Davis</h3>
+          <p class="text-xs text-muted">Marketing</p>
+          <span class="inline-block mt-3 text-xs font-medium px-2.5 py-1 rounded-xl bg-error/10 text-error">Offline</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ Projects ═══ -->
+    <div id="page-projects" class="page p-8">
+      <h1 class="text-2xl font-bold tracking-tight text-text mb-1">Projects</h1>
+      <p class="text-sm text-muted mb-8">Track ongoing projects and their progress.</p>
+      <div class="space-y-4">
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-sm">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="font-semibold text-text">Website Redesign</h3>
+            <span class="text-xs font-medium px-2.5 py-1 rounded-xl bg-primary/10 text-primary">In Progress</span>
+          </div>
+          <div class="h-2 rounded-full bg-surface-alt mb-2"><div class="h-2 rounded-full bg-primary" style="width:65%"></div></div>
+          <div class="flex justify-between text-xs text-muted"><span>65% complete</span><span>Due Jun 15</span></div>
+        </div>
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-sm">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="font-semibold text-text">Mobile App v2</h3>
+            <span class="text-xs font-medium px-2.5 py-1 rounded-xl bg-success/10 text-success">Completed</span>
+          </div>
+          <div class="h-2 rounded-full bg-surface-alt mb-2"><div class="h-2 rounded-full bg-success" style="width:100%"></div></div>
+          <div class="flex justify-between text-xs text-muted"><span>100% complete</span><span>Shipped May 1</span></div>
+        </div>
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-sm">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="font-semibold text-text">API Integration</h3>
+            <span class="text-xs font-medium px-2.5 py-1 rounded-xl bg-accent/10 text-accent">On Hold</span>
+          </div>
+          <div class="h-2 rounded-full bg-surface-alt mb-2"><div class="h-2 rounded-full bg-accent" style="width:30%"></div></div>
+          <div class="flex justify-between text-xs text-muted"><span>30% complete</span><span>Blocked on vendor</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ Settings ═══ -->
+    <div id="page-settings" class="page p-8">
+      <h1 class="text-2xl font-bold tracking-tight text-text mb-1">Settings</h1>
+      <p class="text-sm text-muted mb-8">Manage your account and preferences.</p>
+      <div class="max-w-2xl space-y-6">
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-sm">
+          <h3 class="font-semibold text-text mb-4">Profile</h3>
+          <div class="space-y-4">
+            <div><label class="text-xs font-medium text-muted block mb-1">Full Name</label><input type="text" value="Alex Kim" class="w-full px-3 py-2 rounded-xl border border-border bg-surface text-text text-sm outline-none focus:border-primary" /></div>
+            <div><label class="text-xs font-medium text-muted block mb-1">Email</label><input type="text" value="alex@orion.io" class="w-full px-3 py-2 rounded-xl border border-border bg-surface text-text text-sm outline-none focus:border-primary" /></div>
+            <div><label class="text-xs font-medium text-muted block mb-1">Role</label><select class="w-full px-3 py-2 rounded-xl border border-border bg-surface text-text text-sm outline-none"><option>Admin</option><option>Editor</option><option>Viewer</option></select></div>
+          </div>
+        </div>
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-sm">
+          <h3 class="font-semibold text-text mb-4">Notifications</h3>
+          <div class="space-y-3">
+            <label class="flex items-center gap-3 text-sm text-text"><input type="checkbox" checked class="accent-primary" /> Email notifications</label>
+            <label class="flex items-center gap-3 text-sm text-text"><input type="checkbox" checked class="accent-primary" /> Push notifications</label>
+            <label class="flex items-center gap-3 text-sm text-text"><input type="checkbox" class="accent-primary" /> Weekly digest</label>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <button class="px-6 py-2.5 rounded-xl bg-primary text-white text-sm font-medium hover:bg-primary-dark">Save Changes</button>
+          <button class="px-6 py-2.5 rounded-xl border border-border text-text text-sm font-medium hover:bg-surface-alt">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script>
+function switchPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'))
+  document.getElementById('page-' + name).classList.add('active')
+  document.querySelectorAll('.nav-btn').forEach(b => {
+    b.classList.remove('bg-white/10', 'font-medium')
+    b.classList.add('opacity-55')
+  })
+  const btn = Array.from(document.querySelectorAll('.nav-btn')).find(b => b.textContent.trim().toLowerCase().includes(name))
+  if (btn) {
+    btn.classList.remove('opacity-55')
+    btn.classList.add('bg-white/10', 'font-medium')
+  }
+  // Notify parent frame about the current page
+  try { parent.postMessage({ type: '__tw_nav', path: '/' + name }, '*') } catch(e) {}
+}
+</script>
+</body>
+</html>

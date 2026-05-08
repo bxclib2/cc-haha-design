@@ -1,11 +1,10 @@
 import type { Plugin, ViteDevServer } from 'vite'
 import { readFile, readdir, stat } from 'node:fs/promises'
 import { join } from 'node:path'
-import { createServer } from 'node:http'
 
-const DESIGN_DIR = join(process.cwd(), 'dist', 'design')
+const DESIGN_DIR = join(process.cwd(), 'design')
 
-/** Vite plugin: serves /api/designs, /api/brand */
+/** Vite plugin: serves /api/designs and /api/brand */
 export function designAPIPlugin(): Plugin {
   return {
     name: 'design-api',
@@ -31,7 +30,7 @@ export function designAPIPlugin(): Plugin {
         }
       })
 
-      // Brand extraction: scan project dir for colors/fonts
+      // Brand extraction
       server.middlewares.use('/api/brand', async (req, res) => {
         if (req.method !== 'POST') {
           res.statusCode = 405
@@ -62,8 +61,6 @@ export function designAPIPlugin(): Plugin {
   }
 }
 
-// ── Brand scanning logic ──
-
 async function scanProjectForBrand(projectDir: string): Promise<{ colors: string[]; fonts: string[] }> {
   const filesToCheck = [
     'tailwind.config.ts', 'tailwind.config.js', 'tailwind.config.mjs',
@@ -71,29 +68,19 @@ async function scanProjectForBrand(projectDir: string): Promise<{ colors: string
     'theme.ts', 'theme.js', 'theme.css',
     'package.json',
   ]
-
   const colors = new Set<string>()
   const fonts = new Set<string>()
-
   for (const filename of filesToCheck) {
     try {
       const content = await readFile(join(projectDir, filename), 'utf-8')
-      // Extract hex colors
       const hexMatches = content.match(/#[0-9A-Fa-f]{6}\b/g) ?? []
       for (const hex of hexMatches) colors.add(hex.toUpperCase())
-      // Extract quoted font names (likely custom fonts)
       const fontMatches = content.match(/["'](Inter|Manrope|Geist|Poppins|Roboto|Lato|Montserrat|Open Sans|Nunito|Raleway|Playfair Display|Merriweather|IBM Plex|Source Sans|DM Sans|Space Grotesk|Plus Jakarta|Work Sans|Lexend|Figtree|Outfit)["']/gi) ?? []
       for (const f of fontMatches) {
         const clean = f.replace(/['"]/g, '')
         if (clean) fonts.add(clean)
       }
-    } catch {
-      // file doesn't exist, skip
-    }
+    } catch { /* skip */ }
   }
-
-  return {
-    colors: [...colors].slice(0, 20),
-    fonts: [...fonts].slice(0, 10),
-  }
+  return { colors: [...colors].slice(0, 20), fonts: [...fonts].slice(0, 10) }
 }

@@ -1,18 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --primary: #8F482F;
-  --primary-container: #AD5F45;
-  --on-surface: #1B1C1A;
-  --on-surface-variant: #54433E;
-  --surface: #FAF9F5;
-  --surface-container: #EFEEEA;
-  --surface-container-low: #F4F4F0;
-  --surface-container-high: #E9E8E4;
-  --outline: #87736D;
-  --outline-variant: #DAC1BA;
-  --background: #FAF9F5;
-  --secondary: #2D628F;
+  --primary: #6366F1;
+  --primary-container: #818CF8;
+  --on-surface: #111827;
+  --on-surface-variant: #6B7280;
+  --surface: #FFFFFF;
+  --surface-container: #F3F4F6;
+  --surface-container-low: #F9FAFB;
+  --surface-container-high: #E5E7EB;
+  --outline: #D1D5DB;
+  --outline-variant: #E5E7EB;
+  --background: #F9FAFB;
   --brand: var(--primary);
   --border: var(--outline-variant);
   --border-focus: var(--primary);
@@ -21,8 +20,6 @@
   --text-tertiary: var(--outline);
   --radius-sm: 4px;
   --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
   --font-body: 'Inter', 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
@@ -38,4 +35,15 @@ body {
 
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--outline); border-radius: 9999px; opacity: 0.3; }
+::-webkit-scrollbar-thumb { background: var(--outline); border-radius: 9999px; }
+
+/* ── Dialog controls ── */
+.tw-ctl-row { display: flex; align-items: center; justify-content: space-between; padding: 4px 0; gap: 8px; }
+.tw-ctl-label { font-size: 11px; color: var(--text-secondary); white-space: nowrap; flex-shrink: 0; min-width: 72px; }
+.tw-ctl-color-group { display: flex; align-items: center; gap: 6px; flex: 1; justify-content: flex-end; }
+.tw-ctl-color { width: 28px; height: 24px; padding: 1px; border: 1px solid var(--border); border-radius: 3px; cursor: pointer; background: transparent; }
+.tw-ctl-select { height: 24px; padding: 0 6px; font-size: 11px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: white; color: var(--text-primary); outline: none; flex: 1; max-width: 180px; }
+.tw-ctl-range-group { display: flex; align-items: center; gap: 6px; flex: 1; justify-content: flex-end; }
+.tw-ctl-range { accent-color: var(--brand); height: 16px; max-width: 120px; }
+.tw-ctl-mono { font-size: 10px; font-family: var(--font-mono); color: var(--text-tertiary); min-width: 56px; text-align: right; }
+.tw-ctl-class { font-size: 10px; font-family: var(--font-mono); color: var(--primary-container); white-space: nowrap; margin-left: 4px; }
